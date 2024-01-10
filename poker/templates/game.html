@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon appli</title>
+</head>
+<body>
+    <form action="" method="GET">
+            <input type="submit" name="exit" value="QUITTER">
+    </form>
+    <p>
+    players :
+    {% for player in IN_GAME %}
+        {{ player['name'] }} : {{player['money']}}
+    {% endfor %}
+    </p>
+    <form action="" method="POST">
+    {% block content %}
+        {% if disp_inp %}
+            <p>
+                <div class="slidecontainer">
+                    <input type="range" name="bet" min="1" max="100" value="1" class="slider" id="myRange">
+                </div>
+            </p>
+            <p>
+                <input type="submit" name="move" value="RAISE">
+                <input type="submit" name="move" value="CHECK">
+                <input type="submit" name="move" value="FOLD">
+                <input type="submit" name="move" value="ALL-IN">
+            </p>
+        {% endif %}
+    {% endblock content %}
+    </form>
+    <p>waiters room : {{ IN_WAIT }}</p>
+    <p>you are : {{ session['user_name'] }}</p>
+</body>
+</html>
